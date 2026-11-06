@@ -5,8 +5,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from src.handlers import router
 from db.database import init_db
-
-BOT_TOKEN = "8649581342:AAHClU2K22UI-qY1AA6sw_woZN3MlB83veE"
+from config import BOT_TOKEN
 
 
 bot = Bot(token=BOT_TOKEN)

@@ -6,14 +6,19 @@ from aiogram.fsm.context import FSMContext
 from src.state import Quiz
 from src.questions import QUESTIONS
 from src.keyboards import reply_buttons, inline_buttons
+from db.users import get_user, create_user
 
 router = Router()
 
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
+    user = create_user(
+        telegram_id=message.from_user.id,
+        username=message.from_user.username or "Аноним"
+    )
     await message.answer(
-        f"Привет {message.from_user.full_name}, я твой бот!",
+        f"Привет {message.from_user.full_name}, я твой бот!\nВот твой результат который возвращается с SQL: \n{user}",
         reply_markup=reply_buttons
     )
     print(f"Пользователь {message.from_user.full_name} написал команду /start!")
